@@ -1,25 +1,44 @@
 📈 Stock Portfolio Tracker
 
-A full-stack stock portfolio tracking application that allows users to monitor stock prices, track holdings, and analyze portfolio performance in real time.
+A full-stack stock portfolio management application built with Next.js and TypeScript that enables users to track holdings, monitor real-time stock data, and analyze portfolio performance.
 
-🚀 Overview
+Designed to demonstrate full-stack architecture, API design, state management, and scalable project structure.
 
-The Stock Portfolio Tracker enables users to:
+🔗 Live Demo
 
-Add and manage stock holdings
+[(Add deployed link here once deployed — Vercel recommended)](https://stock-portfolio-tracker-black.vercel.app/)
 
-View real-time stock quotes
+🧠 Project Objective
 
-Track portfolio value and performance
+This project was built to simulate a production-style financial dashboard that:
 
-Monitor historical price data
+Fetches and processes real-time stock market data
 
-View key metrics and analytics
+Calculates portfolio-level metrics
 
-Built with a modern full-stack architecture using Next.js and TypeScript.
+Implements modular API routing
 
-🛠 Tech Stack
+Demonstrates scalable Next.js App Router architecture
 
+Follows clean code and Git workflow best practices
+
+🚀 Core Features
+
+✅ Add and manage stock holdings
+
+✅ Real-time stock quote retrieval
+
+✅ Portfolio performance calculations
+
+✅ Historical price tracking
+
+✅ Modular REST API endpoints
+
+✅ Persistent portfolio state
+
+✅ Clean, responsive UI
+
+🏗 Architecture Overview
 Frontend
 
 Next.js (App Router)
@@ -28,97 +47,107 @@ React
 
 TypeScript
 
-CSS
+Component-based architecture
+
+Server + Client components separation
 
 Backend
 
 Next.js API Routes
 
-RESTful endpoints
+RESTful endpoint structure
 
-Data & APIs
+Modular route organization
 
-Stock market data integration
+Data transformation layer
 
-Historical price tracking
+API Structure
+app/api/
+ ├── quotes/     # Fetch real-time stock prices
+ ├── history/    # Retrieve historical data
+ └── metrics/    # Portfolio calculations
+📊 Portfolio Metrics Implemented
 
-Portfolio performance calculations
+Total portfolio value
 
-📂 Project Structure
-app/
- ├── api/
- │    ├── history/
- │    ├── metrics/
- │    └── quotes/
- ├── login/
- ├── layout.tsx
- └── page.tsx
+Individual position value
 
-/api/quotes → Fetch real-time stock data
+Gain/Loss calculations
 
-/api/history → Retrieve historical stock data
+Percentage change tracking
 
-/api/metrics → Calculate portfolio performance metrics
+Aggregated performance metrics
 
-⚙️ Installation & Setup
-1️⃣ Clone the repository
+⚙️ Installation
 git clone https://github.com/JeffryArevalo/stock-portfolio-tracker.git
 cd stock-portfolio-tracker
-2️⃣ Install dependencies
 npm install
-3️⃣ Run the development server
 npm run dev
 
-The app will run at:
+Application runs at:
 
 http://localhost:3000
-📊 Features
+🧩 Technical Highlights (Recruiter Focus)
 
-📈 Real-time stock price tracking
+Strong TypeScript usage
 
-📉 Historical performance analysis
+Clean separation of concerns
 
-📊 Portfolio metrics calculations
+REST API design principles
 
-🔐 Login page structure
+File-based routing architecture
 
-Modular API architecture
+Version control best practices
 
-Scalable project structure
+Professional Git commit workflow
 
-🧠 Future Improvements
+Production-ready folder structure
 
-User authentication system
+Scalable backend logic design
+
+📈 Scalability Considerations
+
+Designed with future enhancements in mind:
 
 Database integration (PostgreSQL / MongoDB)
 
-Portfolio persistence
+Authentication layer (NextAuth / JWT)
 
-Charts & visual analytics
+Real-time WebSocket updates
 
-Deployment (Vercel)
+Advanced data visualization (Chart.js / Recharts)
 
-Unit & integration testing
+Cloud deployment (Vercel)
 
-📌 Why This Project?
+CI/CD integration
 
-This project demonstrates:
+🛠 Future Enhancements
 
-Full-stack development skills
+User account system
 
-REST API design
+Secure cloud persistence
 
-TypeScript usage
+Interactive financial charts
 
-Next.js App Router architecture
+Performance optimization
 
-Clean project structuring
+Automated testing (Jest / React Testing Library)
 
-Version control with Git & GitHub
+💼 Skills Demonstrated
 
-📄 License
+Full-Stack Development
 
-This project is open-source and available under the MIT License.
+API Design & Implementation
+
+Financial Data Handling
+
+TypeScript Proficiency
+
+Next.js App Router
+
+Git & GitHub Workflow
+
+Modular System Architecture
 
 👤 Author
 
