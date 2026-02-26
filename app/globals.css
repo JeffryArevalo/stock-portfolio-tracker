@@ -1,0 +1,83 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+:root {
+  --bg: #f5f6f8;
+  --panel: #ffffff;
+  --panel2: #f3f4f6;
+  --border: rgba(0, 0, 0, 0.12);
+  --text: #0b0f19;
+  --muted: rgba(0, 0, 0, 0.65);
+  --good: #16a34a;
+  --bad: #dc2626;
+}
+
+.dark {
+  --bg: #060606;
+  --panel: rgba(255, 255, 255, 0.05);
+  --panel2: rgba(255, 255, 255, 0.03);
+  --border: rgba(255, 255, 255, 0.18);
+  --text: rgba(255, 255, 255, 0.95);
+  --muted: rgba(255, 255, 255, 0.65);
+  --good: #22c55e;
+  --bad: #ef4444;
+}
+
+/* Optional: apply globally */
+html, body {
+  background: var(--bg);
+  color: var(--text);
+}
+
+:root {
+  --bg: #0b0f14;
+  --text: #e5e7eb;
+  --panel: rgba(255, 255, 255, 0.04);
+  --panel2: rgba(255, 255, 255, 0.06);
+  --border: rgba(255, 255, 255, 0.12);
+  --good: #22c55e;
+  --bad: #ef4444;
+  --muted: rgba(229, 231, 235, 0.75);
+}
+
+
+
+html:not(.dark) {
+  --bg: #f6f7fb;
+  --text: #0f172a;
+  --panel: rgba(0, 0, 0, 0.03);
+  --panel2: rgba(0, 0, 0, 0.05);
+  --border: rgba(0, 0, 0, 0.14);
+  --good: #16a34a;
+  --bad: #dc2626;
+  --muted: rgba(15, 23, 42, 0.75);
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+}
