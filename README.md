@@ -1,36 +1,126 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+📈 Stock Portfolio Tracker
 
-## Getting Started
+A full-stack stock portfolio tracking application that allows users to monitor stock prices, track holdings, and analyze portfolio performance in real time.
 
-First, run the development server:
+🚀 Overview
 
-```bash
+The Stock Portfolio Tracker enables users to:
+
+Add and manage stock holdings
+
+View real-time stock quotes
+
+Track portfolio value and performance
+
+Monitor historical price data
+
+View key metrics and analytics
+
+Built with a modern full-stack architecture using Next.js and TypeScript.
+
+🛠 Tech Stack
+
+Frontend
+
+Next.js (App Router)
+
+React
+
+TypeScript
+
+CSS
+
+Backend
+
+Next.js API Routes
+
+RESTful endpoints
+
+Data & APIs
+
+Stock market data integration
+
+Historical price tracking
+
+Portfolio performance calculations
+
+📂 Project Structure
+app/
+ ├── api/
+ │    ├── history/
+ │    ├── metrics/
+ │    └── quotes/
+ ├── login/
+ ├── layout.tsx
+ └── page.tsx
+
+/api/quotes → Fetch real-time stock data
+
+/api/history → Retrieve historical stock data
+
+/api/metrics → Calculate portfolio performance metrics
+
+⚙️ Installation & Setup
+1️⃣ Clone the repository
+git clone https://github.com/JeffryArevalo/stock-portfolio-tracker.git
+cd stock-portfolio-tracker
+2️⃣ Install dependencies
+npm install
+3️⃣ Run the development server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The app will run at:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+http://localhost:3000
+📊 Features
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+📈 Real-time stock price tracking
 
-## Learn More
+📉 Historical performance analysis
 
-To learn more about Next.js, take a look at the following resources:
+📊 Portfolio metrics calculations
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+🔐 Login page structure
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Modular API architecture
 
-## Deploy on Vercel
+Scalable project structure
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+🧠 Future Improvements
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+User authentication system
+
+Database integration (PostgreSQL / MongoDB)
+
+Portfolio persistence
+
+Charts & visual analytics
+
+Deployment (Vercel)
+
+Unit & integration testing
+
+📌 Why This Project?
+
+This project demonstrates:
+
+Full-stack development skills
+
+REST API design
+
+TypeScript usage
+
+Next.js App Router architecture
+
+Clean project structuring
+
+Version control with Git & GitHub
+
+📄 License
+
+This project is open-source and available under the MIT License.
+
+👤 Author
+
+Jeffry Arevalo
+GitHub: https://github.com/JeffryArevalo
