@@ -6,7 +6,7 @@ Designed to demonstrate full-stack architecture, API design, state management, a
 
 🔗 Live Demo
 
-[(Add deployed link here once deployed — Vercel recommended)](https://stock-portfolio-tracker-black.vercel.app/)
+(https://stock-portfolio-tracker-black.vercel.app/)
 
 🧠 Project Objective
 
