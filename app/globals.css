@@ -1,0 +1,73 @@
+@import "tailwindcss";
+
+:root {
+  --bg: #050d1a;
+  --surface: #0d1829;
+  --panel: rgba(13, 24, 41, 0.85);
+  --panel2: rgba(255, 255, 255, 0.04);
+  --border: rgba(148, 163, 184, 0.12);
+  --text: #f1f5f9;
+  --muted: #64748b;
+  --accent: #22d3ee;
+  --good: #34d399;
+  --bad: #f87171;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-geist-sans, system-ui, -apple-system, sans-serif);
+  -webkit-font-smoothing: antialiased;
+  scroll-behavior: smooth;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.25);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(148, 163, 184, 0.4);
+}
+
+::selection {
+  background: rgba(34, 211, 238, 0.25);
+  color: #f1f5f9;
+}
+
+input,
+select,
+button {
+  font-family: inherit;
+}
+
+input:focus,
+select:focus {
+  outline: 2px solid rgba(34, 211, 238, 0.4);
+  outline-offset: 1px;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; box-shadow: 0 0 6px #34d399; }
+  50% { opacity: 0.6; box-shadow: 0 0 12px #34d399; }
+}
