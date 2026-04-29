@@ -1212,13 +1212,21 @@ export default function Page() {
                       ))}
                     </Pie>
                     <Tooltip
-                      formatter={(v: any) => money(Number(v))}
+                      formatter={(v: any, name: any) => {
+                        const total = allocationData.reduce((s, d) => s + d.value, 0);
+                        const p = total > 0 ? ((Number(v) / total) * 100).toFixed(1) : "0.0";
+                        return [`${money(Number(v))}  (${p}%)`, name];
+                      }}
                       contentStyle={{
-                        background: D ? "#0d1829" : "#fff",
+                        background: D ? "#0d1829" : "#ffffff",
                         border: "1px solid var(--border)",
                         borderRadius: 10,
                         fontSize: 13,
+                        color: D ? "#f1f5f9" : "#0f172a",
+                        boxShadow: "0 8px 24px rgba(0,0,0,0.35)",
                       }}
+                      labelStyle={{ color: D ? "#94a3b8" : "#64748b", marginBottom: 4 }}
+                      itemStyle={{ color: D ? "#f1f5f9" : "#0f172a" }}
                     />
                     <Legend
                       layout="horizontal"
