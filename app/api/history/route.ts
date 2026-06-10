@@ -17,7 +17,11 @@ function isoDaysAgo(days: number) {
  * chronological order.
  */
 export async function GET(req: NextRequest) {
-  const key = process.env.TWELVEDATA_API_KEY;
+  // legacy fallbacks: earlier deployments configured the key under other names
+  const key =
+    process.env.TWELVEDATA_API_KEY ||
+    process.env.TWELVEDATA_KEY ||
+    process.env.NEXT_PUBLIC_TWELVEDATA_KEY;
   if (!key) {
     return NextResponse.json({ error: "History data not configured" }, { status: 503 });
   }
