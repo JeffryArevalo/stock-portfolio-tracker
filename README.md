@@ -1,77 +1,78 @@
 # Stock Portfolio Tracker
 
-A real-time stock portfolio tracker built with Next.js and TypeScript. Displays live prices, performance charts, allocation breakdowns, and gain/loss metrics for a personal investment portfolio.
+A public, real-time view of my personal stock portfolio. Anyone can see my holdings,
+live prices, performance vs the S&P 500, and my full buy/sell history — but only I
+can record trades.
 
-Deployed as a static site on GitHub Pages with no backend or hosting costs.
+**Live site:** https://stock-portfolio-tracker-black.vercel.app
 
-## Live Demo
+## How it works
 
-https://jeffryarevalo.github.io/stock-portfolio-tracker
+```
+Visitors ──> Vercel (Next.js, free Hobby tier — always on)
+              ├─ /              Portfolio: KPIs, performance & allocation charts, holdings
+              ├─ /activity      Every buy & sell, newest first, filterable
+              ├─ /stock/SYMBOL  Live quote, price chart, key stats, news, my trades
+              └─ /api/*         Server routes: API keys stay server-side, responses
+                                CDN-cached so free-tier rate limits are never hit
 
-## Features
+Admin (me) ──> /admin ──(GitHub token in my browser only)──> commits to
+               data/transactions.json in this repo ──> site updates in ~1 minute
+```
 
-- Real-time stock quotes with auto-refresh
-- Daily and total gain/loss tracking per position
-- Portfolio vs S&P 500 performance chart
-- Allocation donut chart by current value
-- Dividend yield display
-- Sortable holdings table
-- Dark and light mode
-- Holdings persisted locally in the browser
-- PIN-protected admin mode to add/remove positions
+- **Source of truth** is [`data/transactions.json`](data/transactions.json) — an
+  append-only trade log committed to this repo. Holdings, average cost, and realized
+  P/L are all derived from it. Git history doubles as an audit trail.
+- **View-only by construction**: the public site has no write path. Writing requires a
+  fine-grained GitHub personal access token that exists only in the owner's browser.
+- **Live market data**: quotes from [Finnhub](https://finnhub.io) (cached 30s),
+  daily history from [Twelve Data](https://twelvedata.com) (cached 6h), proxied
+  through API routes so keys are never exposed to the client.
 
-## Tech Stack
+## Tech stack
 
-- Next.js 16 (static export)
-- React 19
-- TypeScript
-- Recharts
-- GitHub Pages (hosting)
-- GitHub Actions (CI/CD)
+- Next.js 16 (App Router) + React 19 + TypeScript
+- Recharts for charts
+- Vercel Hobby for hosting (free, no sleeping)
+- GitHub Contents API as the "database"
 
-## Setup
-
-1. Clone the repository
+## Local development
 
 ```bash
 git clone https://github.com/JeffryArevalo/stock-portfolio-tracker.git
 cd stock-portfolio-tracker
 npm install
-```
-
-2. Create a `.env.local` file in the project root:
-
-```
-NEXT_PUBLIC_FINNHUB_API_KEY=your_finnhub_key
-NEXT_PUBLIC_TWELVEDATA_KEY=your_twelvedata_key
-NEXT_PUBLIC_ADMIN_PIN=your_chosen_pin
-```
-
-3. Run the development server:
-
-```bash
+cp .env.example .env.local   # then fill in your keys
 npm run dev
 ```
 
-Open http://localhost:3000/stock-portfolio-tracker
+`.env.local` (server-side only — do **not** prefix with NEXT_PUBLIC_):
 
-## Deployment
+```
+FINNHUB_API_KEY=your_finnhub_key
+TWELVEDATA_API_KEY=your_twelvedata_key
+```
 
-The project deploys automatically to GitHub Pages on every push to `main` via GitHub Actions.
+Open http://localhost:3000
 
-Add these secrets to your repository (Settings > Secrets > Actions):
+## Deployment (Vercel)
 
-- `FINNHUB_API_KEY`
-- `TWELVEDATA_KEY`
-- `ADMIN_PIN`
+1. Import the repo in Vercel (already connected — every push to `main` deploys).
+2. In **Project → Settings → Environment Variables**, add:
+   - `FINNHUB_API_KEY`
+   - `TWELVEDATA_API_KEY`
+3. Redeploy. That's it — no other infrastructure.
 
-Then enable GitHub Pages in Settings > Pages > Source: GitHub Actions.
+## Recording trades (owner only)
 
-## Admin Mode
-
-To edit holdings on the live site, click the "Portfolio Tracker" title three times quickly. A PIN prompt will appear. Enter the PIN you configured in your environment variables to unlock the trade form and remove buttons.
+1. Visit `/admin` on the live site.
+2. One-time setup: create a **fine-grained PAT** at
+   github.com/settings/personal-access-tokens/new scoped to *this repo only* with
+   **Contents: Read and write**, and paste it on the setup screen. It is stored in
+   your browser's localStorage and sent only to `api.github.com`.
+3. Use the Buy/Sell form. Each trade becomes a commit
+   (`trade: BUY 5 MSFT @ 430.10`) and the public site reflects it within a minute.
 
 ## Author
 
-Jeffry Arevalo
-https://github.com/JeffryArevalo
+Jeffry Arevalo — https://github.com/JeffryArevalo

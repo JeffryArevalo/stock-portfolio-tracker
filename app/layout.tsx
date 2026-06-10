@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { ThemeProvider, themeInitScript } from "@/components/ThemeProvider";
+import { Header } from "@/components/Header";
+import { SITE_NAME } from "@/lib/config";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -13,8 +16,18 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Portfolio Tracker",
-  description: "Real-time stock portfolio tracker with live market data, performance charts, and allocation analysis.",
+  title: {
+    default: SITE_NAME,
+    template: `%s · ${SITE_NAME}`,
+  },
+  description:
+    "A live, public stock portfolio: real-time prices, full buy/sell history, performance vs the S&P 500, and per-stock deep dives.",
+  openGraph: {
+    title: SITE_NAME,
+    description:
+      "A live, public stock portfolio with real-time prices and full trade history.",
+    type: "website",
+  },
 };
 
 export default function RootLayout({
@@ -23,11 +36,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
+    <html lang="en" data-theme="dark" suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+      </head>
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+        <ThemeProvider>
+          <Header />
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );
