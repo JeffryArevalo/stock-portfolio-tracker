@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 export const dynamic = "force-dynamic";
 
 const SYMBOL_RE = /^[A-Z][A-Z0-9.\-]{0,9}$/;
-const ALLOWED_DAYS = new Set([30, 90, 180, 365, 730, 1825, 3650]);
+const ALLOWED_DAYS = new Set([30, 90, 180, 365, 730, 1825, 3650, 99999]);
 const DAYS_TO_RANGE: Record<number, string> = {
   30: "1mo",
   90: "3mo",
@@ -12,6 +12,7 @@ const DAYS_TO_RANGE: Record<number, string> = {
   730: "2y",
   1825: "5y",
   3650: "10y",
+  99999: "max",
 };
 
 type Point = { d: string; c: number };

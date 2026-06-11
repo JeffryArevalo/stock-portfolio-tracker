@@ -23,6 +23,7 @@ const RANGES = [
   { label: "1Y", days: 365 },
   { label: "2Y", days: 730 },
   { label: "5Y", days: 1825 },
+  { label: "Max", days: 99999 }, // since the first trade
 ];
 
 type Point = { d: string; c: number };
@@ -100,7 +101,7 @@ export function PerformanceChart({ transactions }: { transactions: Transaction[]
   useEffect(() => {
     if (!txSorted.length) return;
     let cancelled = false;
-    fetch(`/api/history?symbols=${BENCHMARK_SYMBOL}&days=3650`)
+    fetch(`/api/history?symbols=${BENCHMARK_SYMBOL}&days=99999`)
       .then((r) => (r.ok ? r.json() : Promise.reject()))
       .then((d) => {
         if (!cancelled) setBenchFull(d.series?.[BENCHMARK_SYMBOL] ?? []);
@@ -121,7 +122,11 @@ export function PerformanceChart({ transactions }: { transactions: Transaction[]
 
   const data = useMemo(() => {
     if (!current || !benchFull || !benchFull.length || !txSorted.length) return [];
-    const benchRange = current[BENCHMARK_SYMBOL] ?? [];
+    // start the timeline at the first trade — no flat zero before it
+    const firstTradeDate = txSorted[0].date;
+    const benchRange = (current[BENCHMARK_SYMBOL] ?? []).filter(
+      (p) => p.d >= firstTradeDate
+    );
     if (!benchRange.length) return [];
 
     // cumulative VOO shares of the shadow portfolio after each trade
