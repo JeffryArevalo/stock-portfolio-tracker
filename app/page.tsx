@@ -8,7 +8,7 @@ import { money, moneySigned, pct } from "@/lib/format";
 import { usePortfolioData } from "@/lib/usePortfolioData";
 
 export default function PortfolioPage() {
-  const { loading, holdings, rows, totals, realizedPnL, lastUpdated, error } =
+  const { loading, transactions, rows, totals, realizedPnL, lastUpdated, error } =
     usePortfolioData();
 
   return (
@@ -85,7 +85,7 @@ export default function PortfolioPage() {
 
       {/* Charts */}
       <div className="charts-row" style={{ marginBottom: 24 }}>
-        <PerformanceChart holdings={holdings} />
+        <PerformanceChart transactions={transactions} />
         <AllocationDonut rows={rows} />
       </div>
 

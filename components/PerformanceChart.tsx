@@ -6,14 +6,14 @@ import {
   AreaChart,
   CartesianGrid,
   Legend,
-  ReferenceLine,
   ResponsiveContainer,
   Tooltip,
   XAxis,
   YAxis,
 } from "recharts";
-import type { Holding } from "@/lib/types";
+import type { Transaction } from "@/lib/types";
 import { BENCHMARK_SYMBOL } from "@/lib/config";
+import { compact, dateLabel, money } from "@/lib/format";
 import { SectionTitle } from "./ui";
 
 const RANGES = [
@@ -25,84 +25,176 @@ const RANGES = [
   { label: "5Y", days: 1825 },
 ];
 
-type SeriesMap = Record<string, Array<{ d: string; c: number }>>;
+type Point = { d: string; c: number };
+type SeriesMap = Record<string, Point[]>;
 
-/** % return of the current holdings mix vs the S&P 500 over the range. */
-export function PerformanceChart({ holdings }: { holdings: Holding[] }) {
+/** Last close on or before the given date; NaN if none yet. */
+function closeOnOrBefore(points: Point[], date: string): number {
+  let lo = 0,
+    hi = points.length - 1,
+    ans = NaN;
+  while (lo <= hi) {
+    const mid = (lo + hi) >> 1;
+    if (points[mid].d <= date) {
+      ans = points[mid].c;
+      lo = mid + 1;
+    } else {
+      hi = mid - 1;
+    }
+  }
+  return ans;
+}
+
+/**
+ * "What if every dollar had bought the S&P 500 instead?"
+ *
+ * The blue line is the actual portfolio: shares held on each date (replayed
+ * from the trade log) × that day's closing prices. The orange line replays
+ * the exact same trades into VOO — each buy converts its dollar amount into
+ * VOO shares at that date's close, each sell removes the same dollar amount.
+ * Dividends are not counted on either side.
+ */
+export function PerformanceChart({ transactions }: { transactions: Transaction[] }) {
   const [days, setDays] = useState(180);
-  const [result, setResult] = useState<{
-    key: string;
-    series: SeriesMap | null; // null = fetch failed
-  } | null>(null);
+  const [rangeResult, setRangeResult] = useState<{ key: string; series: SeriesMap | null } | null>(null);
+  const [benchFull, setBenchFull] = useState<Point[] | null>(null);
+
+  const txSorted = useMemo(
+    () =>
+      [...transactions].sort(
+        (a, b) => a.date.localeCompare(b.date) || a.id.localeCompare(b.id)
+      ),
+    [transactions]
+  );
 
   const symbols = useMemo(
     () =>
-      Array.from(new Set([...holdings.map((h) => h.symbol), BENCHMARK_SYMBOL]))
+      Array.from(
+        new Set([...txSorted.map((t) => t.symbol.toUpperCase()), BENCHMARK_SYMBOL])
+      )
         .sort()
         .join(","),
-    [holdings]
+    [txSorted]
   );
 
   const key = `${symbols}|${days}`;
 
+  // closes for all traded symbols over the display range
   useEffect(() => {
-    if (!holdings.length) return;
+    if (!txSorted.length) return;
     let cancelled = false;
     fetch(`/api/history?symbols=${symbols}&days=${days}`)
       .then((r) => (r.ok ? r.json() : Promise.reject()))
       .then((d) => {
-        if (!cancelled) setResult({ key, series: d.series ?? {} });
+        if (!cancelled) setRangeResult({ key, series: d.series ?? {} });
       })
       .catch(() => {
-        if (!cancelled) setResult({ key, series: null });
+        if (!cancelled) setRangeResult({ key, series: null });
       });
     return () => {
       cancelled = true;
     };
-  }, [symbols, days, key, holdings.length]);
+  }, [symbols, days, key, txSorted.length]);
 
-  // show the previous chart while the next range loads
-  const series = result?.series ?? null;
-  const loading = holdings.length > 0 && result?.key !== key;
-  const failed = result?.key === key && result.series === null;
+  // full benchmark history (10y) — needed to price trades made before the range
+  useEffect(() => {
+    if (!txSorted.length) return;
+    let cancelled = false;
+    fetch(`/api/history?symbols=${BENCHMARK_SYMBOL}&days=3650`)
+      .then((r) => (r.ok ? r.json() : Promise.reject()))
+      .then((d) => {
+        if (!cancelled) setBenchFull(d.series?.[BENCHMARK_SYMBOL] ?? []);
+      })
+      .catch(() => {
+        if (!cancelled) setBenchFull([]);
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [txSorted.length]);
+
+  const current = rangeResult?.key === key ? rangeResult.series : null;
+  const loading = txSorted.length > 0 && (!current || benchFull === null);
+  const failed =
+    rangeResult?.key === key &&
+    (rangeResult.series === null || (benchFull !== null && benchFull.length === 0));
 
   const data = useMemo(() => {
-    if (!series || !holdings.length) return [];
-    const bench = series[BENCHMARK_SYMBOL] ?? [];
-    if (!bench.length) return [];
+    if (!current || !benchFull || !benchFull.length || !txSorted.length) return [];
+    const benchRange = current[BENCHMARK_SYMBOL] ?? [];
+    if (!benchRange.length) return [];
 
-    // index closes by date per symbol, carry last known close forward
-    const closes = new Map<string, Map<string, number>>();
-    for (const [sym, points] of Object.entries(series)) {
-      closes.set(sym, new Map(points.map((p) => [p.d, p.c])));
-    }
-    const lastClose = new Map<string, number>();
-
-    const raw = bench.map((bp) => {
-      let value = 0;
-      for (const h of holdings) {
-        const c = closes.get(h.symbol)?.get(bp.d);
-        if (Number.isFinite(c)) lastClose.set(h.symbol, c as number);
-        const use = lastClose.get(h.symbol);
-        if (Number.isFinite(use)) value += h.shares * (use as number);
+    // cumulative VOO shares of the shadow portfolio after each trade
+    const shadowSteps: Array<{ date: string; shares: number }> = [];
+    let shadowShares = 0;
+    for (const t of txSorted) {
+      const vooClose = closeOnOrBefore(benchFull, t.date);
+      if (Number.isFinite(vooClose) && vooClose > 0) {
+        const dollars = t.shares * t.price;
+        shadowShares += (t.type === "buy" ? 1 : -1) * (dollars / vooClose);
+        shadowShares = Math.max(0, shadowShares);
       }
-      return { date: bp.d, value, bench: bp.c };
-    });
+      shadowSteps.push({ date: t.date, shares: shadowShares });
+    }
 
-    const firstValue = raw.find((p) => p.value > 0)?.value ?? 0;
-    const firstBench = raw.find((p) => p.bench > 0)?.bench ?? 0;
-    return raw.map((p) => ({
-      date: p.date,
-      Portfolio: firstValue > 0 ? (p.value / firstValue - 1) * 100 : NaN,
-      "S&P 500": firstBench > 0 ? (p.bench / firstBench - 1) * 100 : NaN,
-    }));
-  }, [series, holdings]);
+    // per-symbol cumulative share counts after each trade
+    const holdingsSteps = new Map<string, Array<{ date: string; shares: number }>>();
+    const running = new Map<string, number>();
+    for (const t of txSorted) {
+      const sym = t.symbol.toUpperCase();
+      const prev = running.get(sym) ?? 0;
+      const next =
+        t.type === "buy" ? prev + t.shares : Math.max(0, prev - t.shares);
+      running.set(sym, next);
+      if (!holdingsSteps.has(sym)) holdingsSteps.set(sym, []);
+      holdingsSteps.get(sym)!.push({ date: t.date, shares: next });
+    }
+
+    const sharesAt = (steps: Array<{ date: string; shares: number }>, date: string) => {
+      let lo = 0,
+        hi = steps.length - 1,
+        ans = 0;
+      while (lo <= hi) {
+        const mid = (lo + hi) >> 1;
+        if (steps[mid].date <= date) {
+          ans = steps[mid].shares;
+          lo = mid + 1;
+        } else {
+          hi = mid - 1;
+        }
+      }
+      return ans;
+    };
+
+    return benchRange.map((bp) => {
+      let portfolio = 0;
+      for (const [sym, steps] of holdingsSteps) {
+        const sh = sharesAt(steps, bp.d);
+        if (sh <= 0) continue;
+        const points = current[sym];
+        if (!points) continue;
+        const c = closeOnOrBefore(points, bp.d);
+        if (Number.isFinite(c)) portfolio += sh * c;
+      }
+      const bench = sharesAt(shadowSteps, bp.d) * bp.c;
+      return {
+        date: bp.d,
+        "My Portfolio": portfolio,
+        "S&P 500 (same investments)": bench,
+      };
+    });
+  }, [current, benchFull, txSorted]);
+
+  const last = data.length ? data[data.length - 1] : null;
+  const ahead = last
+    ? last["My Portfolio"] - last["S&P 500 (same investments)"]
+    : 0;
 
   return (
     <div className="card">
       <SectionTitle
-        title="Performance"
-        sub={`% return of current holdings vs S&P 500 (${BENCHMARK_SYMBOL})`}
+        title="Portfolio vs S&P 500"
+        sub="Actual value vs putting the same money into VOO on the same dates (dividends excluded)"
         right={
           <div style={{ display: "flex", gap: 4, flexWrap: "wrap", justifyContent: "flex-end" }}>
             {RANGES.map((r) => (
@@ -169,7 +261,7 @@ export function PerformanceChart({ holdings }: { holdings: Holding[] }) {
               ? "Loading chart…"
               : failed
               ? "Historical data temporarily unavailable."
-              : "No holdings yet."}
+              : "No trades yet."}
           </div>
         ) : (
           <ResponsiveContainer>
@@ -187,15 +279,16 @@ export function PerformanceChart({ holdings }: { holdings: Holding[] }) {
               <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" />
               <XAxis dataKey="date" hide />
               <YAxis
-                tickFormatter={(v) => `${Number(v).toFixed(0)}%`}
+                tickFormatter={(v) => compact(Number(v))}
                 domain={["auto", "auto"]}
                 tick={{ fill: "var(--muted)", fontSize: 11 }}
                 axisLine={false}
                 tickLine={false}
+                width={70}
               />
-              <ReferenceLine y={0} stroke="var(--muted)" strokeWidth={1} strokeDasharray="5 5" />
               <Tooltip
-                formatter={(v?: number | string) => `${Number(v).toFixed(2)}%`}
+                formatter={(v?: number | string) => money(Number(v))}
+                labelFormatter={(d) => dateLabel(String(d))}
                 contentStyle={{
                   background: "var(--tooltip-bg)",
                   border: "1px solid var(--border)",
@@ -208,7 +301,7 @@ export function PerformanceChart({ holdings }: { holdings: Holding[] }) {
               <Legend wrapperStyle={{ fontSize: 12, paddingTop: 10 }} />
               <Area
                 type="monotone"
-                dataKey="Portfolio"
+                dataKey="My Portfolio"
                 stroke="#818cf8"
                 strokeWidth={2.5}
                 fill="url(#gradPortfolio)"
@@ -217,7 +310,7 @@ export function PerformanceChart({ holdings }: { holdings: Holding[] }) {
               />
               <Area
                 type="monotone"
-                dataKey="S&P 500"
+                dataKey="S&P 500 (same investments)"
                 stroke="#f59e0b"
                 strokeWidth={2}
                 fill="url(#gradBench)"
@@ -228,6 +321,15 @@ export function PerformanceChart({ holdings }: { holdings: Holding[] }) {
           </ResponsiveContainer>
         )}
       </div>
+      {last && (
+        <p style={{ margin: "10px 0 0", fontSize: 12.5, color: "var(--muted)" }}>
+          Today: {money(last["My Portfolio"])} vs {money(last["S&P 500 (same investments)"])} —{" "}
+          <strong style={{ color: ahead >= 0 ? "var(--good)" : "var(--bad)" }}>
+            {ahead >= 0 ? "ahead of" : "behind"} the S&P 500 by {money(Math.abs(ahead))}
+          </strong>{" "}
+          on price alone.
+        </p>
+      )}
     </div>
   );
 }

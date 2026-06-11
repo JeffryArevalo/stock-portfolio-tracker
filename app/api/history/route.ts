@@ -3,34 +3,57 @@ import { NextRequest, NextResponse } from "next/server";
 export const dynamic = "force-dynamic";
 
 const SYMBOL_RE = /^[A-Z][A-Z0-9.\-]{0,9}$/;
-const ALLOWED_DAYS = new Set([30, 90, 180, 365, 730, 1825]);
+const ALLOWED_DAYS = new Set([30, 90, 180, 365, 730, 1825, 3650]);
+const DAYS_TO_RANGE: Record<number, string> = {
+  30: "1mo",
+  90: "3mo",
+  180: "6mo",
+  365: "1y",
+  730: "2y",
+  1825: "5y",
+  3650: "10y",
+};
 
-function isoDaysAgo(days: number) {
-  return new Date(Date.now() - days * 86400_000).toISOString().split("T")[0];
-}
+type Point = { d: string; c: number };
 
 /**
- * Daily close history via TwelveData (free tier: 8 credits/min, 800/day).
- * One batched request for all symbols; CDN-cached for 6 hours, so the
- * whole site costs a handful of credits per day regardless of traffic.
- * Returns { series: { SYM: [{ d: "YYYY-MM-DD", c: number }, ...] } } in
- * chronological order.
+ * Daily close history via Yahoo Finance's public chart API (keyless).
+ * One request per symbol server-side; the whole response is CDN-cached
+ * for 6 hours so upstream load stays negligible regardless of traffic.
+ * Returns { series: { SYM: [{ d: "YYYY-MM-DD", c }, ...] } } chronologically.
  */
-export async function GET(req: NextRequest) {
-  // legacy fallbacks: earlier deployments configured the key under other names
-  const key =
-    process.env.TWELVEDATA_API_KEY ||
-    process.env.TWELVEDATA_KEY ||
-    process.env.NEXT_PUBLIC_TWELVEDATA_KEY;
-  if (!key) {
-    return NextResponse.json({ error: "History data not configured" }, { status: 503 });
+async function fetchYahoo(symbol: string, range: string): Promise<Point[]> {
+  const url =
+    `https://query1.finance.yahoo.com/v8/finance/chart/${encodeURIComponent(symbol)}` +
+    `?range=${range}&interval=1d`;
+  const r = await fetch(url, {
+    headers: {
+      "User-Agent":
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0 Safari/537.36",
+    },
+    next: { revalidate: 21600 },
+  });
+  if (!r.ok) return [];
+  const data = await r.json();
+  const res = data?.chart?.result?.[0];
+  const ts: number[] = res?.timestamp ?? [];
+  const closes: Array<number | null> = res?.indicators?.quote?.[0]?.close ?? [];
+  const points: Point[] = [];
+  for (let i = 0; i < ts.length; i++) {
+    const c = closes[i];
+    if (typeof c === "number" && Number.isFinite(c)) {
+      points.push({ d: new Date(ts[i] * 1000).toISOString().slice(0, 10), c });
+    }
   }
+  return points;
+}
 
+export async function GET(req: NextRequest) {
   const symbols = (req.nextUrl.searchParams.get("symbols") || "")
     .split(",")
     .map((s) => s.trim().toUpperCase())
     .filter((s) => SYMBOL_RE.test(s))
-    .slice(0, 20)
+    .slice(0, 30)
     .sort(); // stable order → stable cache key
 
   const days = Number(req.nextUrl.searchParams.get("days") || 180);
@@ -38,27 +61,16 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ error: "Invalid symbols or days" }, { status: 400 });
   }
 
-  const url =
-    `https://api.twelvedata.com/time_series` +
-    `?symbol=${symbols.join(",")}` +
-    `&interval=1day&start_date=${isoDaysAgo(days)}` +
-    `&outputsize=5000&apikey=${key}`;
-
   try {
-    const r = await fetch(url, { next: { revalidate: 21600 } });
-    const data = await r.json();
-
-    const series: Record<string, Array<{ d: string; c: number }>> = {};
-    for (const sym of symbols) {
-      // single-symbol responses are unwrapped; multi-symbol keyed by symbol
-      const s = symbols.length === 1 ? data : data[sym];
-      if (!s || !Array.isArray(s.values)) continue;
-      const points: Array<{ d: string; c: number }> = [];
-      for (let i = s.values.length - 1; i >= 0; i--) {
-        const close = Number(s.values[i].close);
-        if (Number.isFinite(close)) points.push({ d: s.values[i].datetime, c: close });
-      }
-      series[sym] = points;
+    const series: Record<string, Point[]> = {};
+    const results = await Promise.all(
+      symbols.map(async (sym) => ({
+        sym,
+        points: await fetchYahoo(sym, DAYS_TO_RANGE[days]).catch(() => [] as Point[]),
+      }))
+    );
+    for (const { sym, points } of results) {
+      if (points.length > 0) series[sym] = points;
     }
 
     return NextResponse.json(

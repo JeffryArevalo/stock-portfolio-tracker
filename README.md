@@ -26,8 +26,10 @@ Admin (me) ──> /admin ──(GitHub token in my browser only)──> commits
 - **View-only by construction**: the public site has no write path. Writing requires a
   fine-grained GitHub personal access token that exists only in the owner's browser.
 - **Live market data**: quotes from [Finnhub](https://finnhub.io) (cached 30s),
-  daily history from [Twelve Data](https://twelvedata.com) (cached 6h), proxied
-  through API routes so keys are never exposed to the client.
+  daily price history from Yahoo Finance's public chart API (keyless, cached 6h),
+  proxied through API routes so keys are never exposed to the client.
+- **Performance chart** replays the trade log: actual portfolio value vs putting
+  the same dollars into VOO on the same dates (dividends excluded on both sides).
 
 ## Tech stack
 
@@ -50,7 +52,6 @@ npm run dev
 
 ```
 FINNHUB_API_KEY=your_finnhub_key
-TWELVEDATA_API_KEY=your_twelvedata_key
 ```
 
 Open http://localhost:3000
@@ -58,9 +59,7 @@ Open http://localhost:3000
 ## Deployment (Vercel)
 
 1. Import the repo in Vercel (already connected — every push to `main` deploys).
-2. In **Project → Settings → Environment Variables**, add:
-   - `FINNHUB_API_KEY`
-   - `TWELVEDATA_API_KEY`
+2. In **Project → Settings → Environment Variables**, add `FINNHUB_API_KEY`.
 3. Redeploy. That's it — no other infrastructure.
 
 ## Recording trades (owner only)
