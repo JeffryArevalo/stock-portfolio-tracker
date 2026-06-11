@@ -185,10 +185,19 @@ export function PerformanceChart({ transactions }: { transactions: Transaction[]
     });
   }, [current, benchFull, txSorted]);
 
+  const first = data.length ? data[0] : null;
   const last = data.length ? data[data.length - 1] : null;
   const ahead = last
     ? last["My Portfolio"] - last["S&P 500 (same investments)"]
     : 0;
+
+  // % change over the displayed range, per series
+  const rangePct = (series: "My Portfolio" | "S&P 500 (same investments)", value: number) => {
+    const base = first?.[series] ?? 0;
+    return base > 0 ? (value / base - 1) * 100 : NaN;
+  };
+  const fmtPct = (p: number) =>
+    Number.isFinite(p) ? `${p >= 0 ? "+" : ""}${p.toFixed(2)}%` : "–";
 
   return (
     <div className="card">
@@ -287,7 +296,14 @@ export function PerformanceChart({ transactions }: { transactions: Transaction[]
                 width={70}
               />
               <Tooltip
-                formatter={(v?: number | string) => money(Number(v))}
+                formatter={(v?: number | string, name?: string | number) => {
+                  const n = Number(v);
+                  const p = rangePct(
+                    name as "My Portfolio" | "S&P 500 (same investments)",
+                    n
+                  );
+                  return `${money(n)}  (${fmtPct(p)})`;
+                }}
                 labelFormatter={(d) => dateLabel(String(d))}
                 contentStyle={{
                   background: "var(--tooltip-bg)",
@@ -323,9 +339,12 @@ export function PerformanceChart({ transactions }: { transactions: Transaction[]
       </div>
       {last && (
         <p style={{ margin: "10px 0 0", fontSize: 12.5, color: "var(--muted)" }}>
-          Today: {money(last["My Portfolio"])} vs {money(last["S&P 500 (same investments)"])} —{" "}
+          This range: My Portfolio {money(last["My Portfolio"])} (
+          {fmtPct(rangePct("My Portfolio", last["My Portfolio"]))}) vs S&P 500{" "}
+          {money(last["S&P 500 (same investments)"])} (
+          {fmtPct(rangePct("S&P 500 (same investments)", last["S&P 500 (same investments)"]))}) —{" "}
           <strong style={{ color: ahead >= 0 ? "var(--good)" : "var(--bad)" }}>
-            {ahead >= 0 ? "ahead of" : "behind"} the S&P 500 by {money(Math.abs(ahead))}
+            {ahead >= 0 ? "ahead" : "behind"} by {money(Math.abs(ahead))}
           </strong>{" "}
           on price alone.
         </p>

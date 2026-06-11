@@ -4,7 +4,7 @@ import { AllocationDonut } from "@/components/AllocationDonut";
 import { HoldingsTable } from "@/components/HoldingsTable";
 import { PerformanceChart } from "@/components/PerformanceChart";
 import { KpiCard } from "@/components/ui";
-import { money, moneySigned, pct } from "@/lib/format";
+import { money, moneySigned, pctSigned } from "@/lib/format";
 import { usePortfolioData } from "@/lib/usePortfolioData";
 
 export default function PortfolioPage() {
@@ -60,13 +60,18 @@ export default function PortfolioPage() {
           value={totals.daily}
           format={moneySigned}
           tone={totals.daily >= 0 ? "good" : "bad"}
+          sub={pctSigned(
+            totals.value - totals.daily > 0
+              ? totals.daily / (totals.value - totals.daily)
+              : NaN
+          )}
         />
         <KpiCard
           title="Total Return"
           value={totals.gain}
           format={moneySigned}
           tone={totals.gain >= 0 ? "good" : "bad"}
-          sub={pct(totals.gainPct)}
+          sub={pctSigned(totals.gainPct)}
         />
         <KpiCard
           title="Realized P/L"
