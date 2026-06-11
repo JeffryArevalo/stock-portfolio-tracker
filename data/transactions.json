@@ -1,3 +1,1610 @@
 {
-  "transactions": []
+  "transactions": [
+    {
+      "id": "t0001",
+      "date": "2018-04-19",
+      "type": "buy",
+      "symbol": "NFLX",
+      "shares": 3,
+      "price": 331
+    },
+    {
+      "id": "t0002",
+      "date": "2018-07-03",
+      "type": "buy",
+      "symbol": "AAPL",
+      "shares": 5,
+      "price": 186.75
+    },
+    {
+      "id": "t0003",
+      "date": "2018-09-25",
+      "type": "buy",
+      "symbol": "MCD",
+      "shares": 6,
+      "price": 164.5
+    },
+    {
+      "id": "t0004",
+      "date": "2019-07-09",
+      "type": "buy",
+      "symbol": "JPM",
+      "shares": 5,
+      "price": 113
+    },
+    {
+      "id": "t0005",
+      "date": "2019-08-14",
+      "type": "buy",
+      "symbol": "JPM",
+      "shares": 6,
+      "price": 107.96
+    },
+    {
+      "id": "t0006",
+      "date": "2019-09-05",
+      "type": "buy",
+      "symbol": "PFE",
+      "shares": 15,
+      "price": 36.12
+    },
+    {
+      "id": "t0007",
+      "date": "2019-09-17",
+      "type": "sell",
+      "symbol": "NFLX",
+      "shares": 3,
+      "price": 291.34
+    },
+    {
+      "id": "t0008",
+      "date": "2019-09-19",
+      "type": "buy",
+      "symbol": "MCD",
+      "shares": 4,
+      "price": 209.69
+    },
+    {
+      "id": "t0009",
+      "date": "2020-03-09",
+      "type": "buy",
+      "symbol": "JPM",
+      "shares": 2,
+      "price": 95.24
+    },
+    {
+      "id": "t0010",
+      "date": "2020-03-09",
+      "type": "buy",
+      "symbol": "PFE",
+      "shares": 5,
+      "price": 33.23
+    },
+    {
+      "id": "t0011",
+      "date": "2020-03-25",
+      "type": "buy",
+      "symbol": "PFE",
+      "shares": 4,
+      "price": 34.31
+    },
+    {
+      "id": "t0012",
+      "date": "2020-03-25",
+      "type": "buy",
+      "symbol": "PFE",
+      "shares": 1,
+      "price": 30.5
+    },
+    {
+      "id": "t0013",
+      "date": "2020-03-25",
+      "type": "buy",
+      "symbol": "JPM",
+      "shares": 1,
+      "price": 93.3
+    },
+    {
+      "id": "t0014",
+      "date": "2020-03-26",
+      "type": "buy",
+      "symbol": "JPM",
+      "shares": 1,
+      "price": 85.4
+    },
+    {
+      "id": "t0015",
+      "date": "2020-03-26",
+      "type": "buy",
+      "symbol": "JPM",
+      "shares": 1,
+      "price": 96.24
+    },
+    {
+      "id": "t0016",
+      "date": "2020-04-01",
+      "type": "buy",
+      "symbol": "JPM",
+      "shares": 1,
+      "price": 96.92
+    },
+    {
+      "id": "t0017",
+      "date": "2020-06-15",
+      "type": "buy",
+      "symbol": "JPM",
+      "shares": 1,
+      "price": 94
+    },
+    {
+      "id": "t0018",
+      "date": "2020-07-09",
+      "type": "buy",
+      "symbol": "JPM",
+      "shares": 2,
+      "price": 91.35
+    },
+    {
+      "id": "t0019",
+      "date": "2020-07-13",
+      "type": "buy",
+      "symbol": "PFE",
+      "shares": 2,
+      "price": 35.8
+    },
+    {
+      "id": "t0020",
+      "date": "2020-07-13",
+      "type": "buy",
+      "symbol": "PFE",
+      "shares": 3,
+      "price": 35.33
+    },
+    {
+      "id": "t0021",
+      "date": "2020-07-13",
+      "type": "buy",
+      "symbol": "JPM",
+      "shares": 1,
+      "price": 97.15
+    },
+    {
+      "id": "t0022",
+      "date": "2020-07-31",
+      "type": "buy",
+      "symbol": "JPM",
+      "shares": 4,
+      "price": 95.75
+    },
+    {
+      "id": "t0023",
+      "date": "2020-08-17",
+      "type": "buy",
+      "symbol": "CCL",
+      "shares": 5,
+      "price": 17.09
+    },
+    {
+      "id": "t0024",
+      "date": "2020-08-17",
+      "type": "buy",
+      "symbol": "CCL",
+      "shares": 5,
+      "price": 14.74
+    },
+    {
+      "id": "t0025",
+      "date": "2020-08-17",
+      "type": "buy",
+      "symbol": "INTC",
+      "shares": 5,
+      "price": 49.08
+    },
+    {
+      "id": "t0026",
+      "date": "2020-08-17",
+      "type": "buy",
+      "symbol": "CCL",
+      "shares": 20,
+      "price": 14.78
+    },
+    {
+      "id": "t0027",
+      "date": "2020-08-31",
+      "type": "buy",
+      "symbol": "INTC",
+      "shares": 7,
+      "price": 50.77
+    },
+    {
+      "id": "t0028",
+      "date": "2020-09-18",
+      "type": "buy",
+      "symbol": "INTC",
+      "shares": 6,
+      "price": 51.99
+    },
+    {
+      "id": "t0029",
+      "date": "2020-09-18",
+      "type": "buy",
+      "symbol": "INTC",
+      "shares": 4,
+      "price": 49.78
+    },
+    {
+      "id": "t0030",
+      "date": "2020-09-21",
+      "type": "buy",
+      "symbol": "AAPL",
+      "shares": 10,
+      "price": 106
+    },
+    {
+      "id": "t0031",
+      "date": "2020-10-15",
+      "type": "buy",
+      "symbol": "INTC",
+      "shares": 8,
+      "price": 52.87
+    },
+    {
+      "id": "t0032",
+      "date": "2020-10-28",
+      "type": "buy",
+      "symbol": "T",
+      "shares": 1,
+      "price": 28.83
+    },
+    {
+      "id": "t0033",
+      "date": "2020-10-28",
+      "type": "buy",
+      "symbol": "T",
+      "shares": 1,
+      "price": 26.79
+    },
+    {
+      "id": "t0034",
+      "date": "2020-10-28",
+      "type": "buy",
+      "symbol": "T",
+      "shares": 2,
+      "price": 26.65
+    },
+    {
+      "id": "t0035",
+      "date": "2020-10-30",
+      "type": "buy",
+      "symbol": "JPM",
+      "shares": 5,
+      "price": 96.92
+    },
+    {
+      "id": "t0036",
+      "date": "2020-11-16",
+      "type": "buy",
+      "symbol": "WM",
+      "shares": 1,
+      "price": 122.32
+    },
+    {
+      "id": "t0037",
+      "date": "2020-11-16",
+      "type": "buy",
+      "symbol": "T",
+      "shares": 10,
+      "price": 29
+    },
+    {
+      "id": "t0038",
+      "date": "2020-11-30",
+      "type": "buy",
+      "symbol": "T",
+      "shares": 11,
+      "price": 28.9
+    },
+    {
+      "id": "t0039",
+      "date": "2020-12-01",
+      "type": "buy",
+      "symbol": "T",
+      "shares": 5,
+      "price": 28.8
+    },
+    {
+      "id": "t0040",
+      "date": "2020-12-16",
+      "type": "buy",
+      "symbol": "SBUX",
+      "shares": 1,
+      "price": 104.42
+    },
+    {
+      "id": "t0041",
+      "date": "2020-12-31",
+      "type": "buy",
+      "symbol": "INTC",
+      "shares": 1,
+      "price": 48.93
+    },
+    {
+      "id": "t0042",
+      "date": "2020-12-31",
+      "type": "buy",
+      "symbol": "T",
+      "shares": 2,
+      "price": 28.42
+    },
+    {
+      "id": "t0043",
+      "date": "2020-12-31",
+      "type": "buy",
+      "symbol": "WM",
+      "shares": 1,
+      "price": 116.69
+    },
+    {
+      "id": "t0044",
+      "date": "2021-01-04",
+      "type": "buy",
+      "symbol": "SBUX",
+      "shares": 1,
+      "price": 103.26
+    },
+    {
+      "id": "t0045",
+      "date": "2021-01-15",
+      "type": "buy",
+      "symbol": "WM",
+      "shares": 1,
+      "price": 115.11
+    },
+    {
+      "id": "t0046",
+      "date": "2021-01-15",
+      "type": "buy",
+      "symbol": "SBUX",
+      "shares": 1,
+      "price": 101.73
+    },
+    {
+      "id": "t0047",
+      "date": "2021-01-15",
+      "type": "buy",
+      "symbol": "T",
+      "shares": 1,
+      "price": 29.19
+    },
+    {
+      "id": "t0048",
+      "date": "2021-01-19",
+      "type": "buy",
+      "symbol": "T",
+      "shares": 1,
+      "price": 29.21
+    },
+    {
+      "id": "t0049",
+      "date": "2021-01-20",
+      "type": "buy",
+      "symbol": "T",
+      "shares": 1,
+      "price": 28.86
+    },
+    {
+      "id": "t0050",
+      "date": "2021-01-21",
+      "type": "buy",
+      "symbol": "T",
+      "shares": 1,
+      "price": 28.86
+    },
+    {
+      "id": "t0051",
+      "date": "2021-01-29",
+      "type": "buy",
+      "symbol": "SBUX",
+      "shares": 1,
+      "price": 96.85
+    },
+    {
+      "id": "t0052",
+      "date": "2021-01-29",
+      "type": "buy",
+      "symbol": "WM",
+      "shares": 1,
+      "price": 111.04
+    },
+    {
+      "id": "t0053",
+      "date": "2021-01-29",
+      "type": "buy",
+      "symbol": "T",
+      "shares": 1,
+      "price": 28.9
+    },
+    {
+      "id": "t0054",
+      "date": "2021-02-02",
+      "type": "buy",
+      "symbol": "PFE",
+      "shares": 7,
+      "price": 34.67
+    },
+    {
+      "id": "t0055",
+      "date": "2021-02-04",
+      "type": "buy",
+      "symbol": "PFE",
+      "shares": 2,
+      "price": 34.95
+    },
+    {
+      "id": "t0056",
+      "date": "2021-02-04",
+      "type": "buy",
+      "symbol": "T",
+      "shares": 1,
+      "price": 28.75
+    },
+    {
+      "id": "t0057",
+      "date": "2021-02-18",
+      "type": "buy",
+      "symbol": "PFE",
+      "shares": 1,
+      "price": 34.72
+    },
+    {
+      "id": "t0058",
+      "date": "2021-02-18",
+      "type": "buy",
+      "symbol": "SBUX",
+      "shares": 1,
+      "price": 103.79
+    },
+    {
+      "id": "t0059",
+      "date": "2021-02-18",
+      "type": "buy",
+      "symbol": "T",
+      "shares": 2,
+      "price": 29.37
+    },
+    {
+      "id": "t0060",
+      "date": "2021-02-18",
+      "type": "buy",
+      "symbol": "WM",
+      "shares": 1,
+      "price": 111.98
+    },
+    {
+      "id": "t0061",
+      "date": "2021-03-01",
+      "type": "buy",
+      "symbol": "T",
+      "shares": 5,
+      "price": 28.41
+    },
+    {
+      "id": "t0062",
+      "date": "2021-03-01",
+      "type": "buy",
+      "symbol": "PFE",
+      "shares": 5,
+      "price": 33.67
+    },
+    {
+      "id": "t0063",
+      "date": "2021-03-03",
+      "type": "buy",
+      "symbol": "T",
+      "shares": 1,
+      "price": 28.34
+    },
+    {
+      "id": "t0064",
+      "date": "2021-03-03",
+      "type": "buy",
+      "symbol": "PFE",
+      "shares": 2,
+      "price": 33.59
+    },
+    {
+      "id": "t0065",
+      "date": "2021-03-15",
+      "type": "buy",
+      "symbol": "T",
+      "shares": 4,
+      "price": 29.98
+    },
+    {
+      "id": "t0066",
+      "date": "2021-03-15",
+      "type": "buy",
+      "symbol": "PFE",
+      "shares": 3,
+      "price": 35.1
+    },
+    {
+      "id": "t0067",
+      "date": "2021-03-31",
+      "type": "buy",
+      "symbol": "INTC",
+      "shares": 2,
+      "price": 63.78
+    },
+    {
+      "id": "t0068",
+      "date": "2021-04-06",
+      "type": "sell",
+      "symbol": "CCL",
+      "shares": 30,
+      "price": 28.29
+    },
+    {
+      "id": "t0069",
+      "date": "2021-04-06",
+      "type": "sell",
+      "symbol": "VTRS",
+      "shares": 3,
+      "price": 13.99,
+      "note": "Spin-off shares from Pfizer (Viatris)"
+    },
+    {
+      "id": "t0070",
+      "date": "2021-04-08",
+      "type": "buy",
+      "symbol": "ABBV",
+      "shares": 8,
+      "price": 106.7
+    },
+    {
+      "id": "t0071",
+      "date": "2021-04-13",
+      "type": "buy",
+      "symbol": "JNJ",
+      "shares": 9,
+      "price": 157.79
+    },
+    {
+      "id": "t0072",
+      "date": "2021-04-15",
+      "type": "buy",
+      "symbol": "ABBV",
+      "shares": 1,
+      "price": 106.36
+    },
+    {
+      "id": "t0073",
+      "date": "2021-04-30",
+      "type": "buy",
+      "symbol": "ABBV",
+      "shares": 1,
+      "price": 110.3
+    },
+    {
+      "id": "t0074",
+      "date": "2021-04-30",
+      "type": "buy",
+      "symbol": "JNJ",
+      "shares": 1,
+      "price": 163.94
+    },
+    {
+      "id": "t0075",
+      "date": "2021-09-22",
+      "type": "sell",
+      "symbol": "AAPL",
+      "shares": 31,
+      "price": 145.19,
+      "note": "Includes shares from 2020 4-for-1 split"
+    },
+    {
+      "id": "t0076",
+      "date": "2022-11-30",
+      "type": "buy",
+      "symbol": "T",
+      "shares": 7,
+      "price": 18.62
+    },
+    {
+      "id": "t0077",
+      "date": "2022-11-30",
+      "type": "buy",
+      "symbol": "T",
+      "shares": 1,
+      "price": 18.95
+    },
+    {
+      "id": "t0078",
+      "date": "2022-12-13",
+      "type": "sell",
+      "symbol": "WBD",
+      "shares": 13,
+      "price": 10.95,
+      "note": "Spin-off shares from AT&T (Warner Bros. Discovery)"
+    },
+    {
+      "id": "t0079",
+      "date": "2023-01-04",
+      "type": "buy",
+      "symbol": "INTC",
+      "shares": 7,
+      "price": 27.56
+    },
+    {
+      "id": "t0080",
+      "date": "2023-01-13",
+      "type": "buy",
+      "symbol": "T",
+      "shares": 1,
+      "price": 19.44
+    },
+    {
+      "id": "t0081",
+      "date": "2023-01-27",
+      "type": "buy",
+      "symbol": "INTC",
+      "shares": 1,
+      "price": 28.07
+    },
+    {
+      "id": "t0082",
+      "date": "2023-01-31",
+      "type": "buy",
+      "symbol": "INTC",
+      "shares": 1,
+      "price": 27.86
+    },
+    {
+      "id": "t0083",
+      "date": "2023-02-01",
+      "type": "buy",
+      "symbol": "INTC",
+      "shares": 1,
+      "price": 28.36
+    },
+    {
+      "id": "t0084",
+      "date": "2023-02-03",
+      "type": "buy",
+      "symbol": "T",
+      "shares": 1,
+      "price": 20.21
+    },
+    {
+      "id": "t0085",
+      "date": "2023-02-06",
+      "type": "buy",
+      "symbol": "T",
+      "shares": 1,
+      "price": 19.75
+    },
+    {
+      "id": "t0086",
+      "date": "2023-02-16",
+      "type": "buy",
+      "symbol": "T",
+      "shares": 1,
+      "price": 19.03
+    },
+    {
+      "id": "t0087",
+      "date": "2023-02-27",
+      "type": "buy",
+      "symbol": "T",
+      "shares": 1,
+      "price": 19.28
+    },
+    {
+      "id": "t0088",
+      "date": "2023-03-02",
+      "type": "buy",
+      "symbol": "T",
+      "shares": 1,
+      "price": 18.61
+    },
+    {
+      "id": "t0089",
+      "date": "2023-03-06",
+      "type": "buy",
+      "symbol": "T",
+      "shares": 1,
+      "price": 18.93
+    },
+    {
+      "id": "t0090",
+      "date": "2023-07-07",
+      "type": "sell",
+      "symbol": "INTC",
+      "shares": 45,
+      "price": 32.06
+    },
+    {
+      "id": "t0091",
+      "date": "2023-07-11",
+      "type": "buy",
+      "symbol": "TGT",
+      "shares": 11,
+      "price": 132.22
+    },
+    {
+      "id": "t0092",
+      "date": "2023-07-14",
+      "type": "sell",
+      "symbol": "T",
+      "shares": 73,
+      "price": 14.46,
+      "note": "Includes dividend-reinvested shares"
+    },
+    {
+      "id": "t0093",
+      "date": "2023-07-18",
+      "type": "buy",
+      "symbol": "TGT",
+      "shares": 8,
+      "price": 130.42
+    },
+    {
+      "id": "t0094",
+      "date": "2023-08-02",
+      "type": "buy",
+      "symbol": "TGT",
+      "shares": 1,
+      "price": 132.39
+    },
+    {
+      "id": "t0095",
+      "date": "2023-09-08",
+      "type": "sell",
+      "symbol": "SBUX",
+      "shares": 5,
+      "price": 95.29
+    },
+    {
+      "id": "t0096",
+      "date": "2023-09-12",
+      "type": "buy",
+      "symbol": "PFE",
+      "shares": 10,
+      "price": 33.76
+    },
+    {
+      "id": "t0097",
+      "date": "2023-09-18",
+      "type": "buy",
+      "symbol": "PFE",
+      "shares": 10,
+      "price": 32.63
+    },
+    {
+      "id": "t0098",
+      "date": "2023-09-18",
+      "type": "buy",
+      "symbol": "PFE",
+      "shares": 5,
+      "price": 33.63
+    },
+    {
+      "id": "t0099",
+      "date": "2023-09-20",
+      "type": "buy",
+      "symbol": "TGT",
+      "shares": 5,
+      "price": 120.39
+    },
+    {
+      "id": "t0100",
+      "date": "2023-11-02",
+      "type": "buy",
+      "symbol": "JNJ",
+      "shares": 1,
+      "price": 163.94
+    },
+    {
+      "id": "t0101",
+      "date": "2024-02-01",
+      "type": "buy",
+      "symbol": "JNJ",
+      "shares": 1,
+      "price": 157.41
+    },
+    {
+      "id": "t0102",
+      "date": "2024-03-01",
+      "type": "buy",
+      "symbol": "PFE",
+      "shares": 7,
+      "price": 26.68
+    },
+    {
+      "id": "t0103",
+      "date": "2024-03-11",
+      "type": "buy",
+      "symbol": "PFE",
+      "shares": 1,
+      "price": 27.45
+    },
+    {
+      "id": "t0104",
+      "date": "2024-03-11",
+      "type": "buy",
+      "symbol": "PFE",
+      "shares": 1,
+      "price": 27.45
+    },
+    {
+      "id": "t0105",
+      "date": "2024-03-18",
+      "type": "buy",
+      "symbol": "PFE",
+      "shares": 2,
+      "price": 27.65
+    },
+    {
+      "id": "t0106",
+      "date": "2024-03-20",
+      "type": "buy",
+      "symbol": "PFE",
+      "shares": 2,
+      "price": 27.4
+    },
+    {
+      "id": "t0107",
+      "date": "2024-03-25",
+      "type": "buy",
+      "symbol": "PFE",
+      "shares": 4,
+      "price": 27.22
+    },
+    {
+      "id": "t0108",
+      "date": "2024-04-05",
+      "type": "buy",
+      "symbol": "JNJ",
+      "shares": 1,
+      "price": 145.2
+    },
+    {
+      "id": "t0109",
+      "date": "2024-04-05",
+      "type": "buy",
+      "symbol": "JNJ",
+      "shares": 1,
+      "price": 157.41
+    },
+    {
+      "id": "t0110",
+      "date": "2024-05-02",
+      "type": "buy",
+      "symbol": "JNJ",
+      "shares": 2,
+      "price": 151.36
+    },
+    {
+      "id": "t0111",
+      "date": "2024-05-03",
+      "type": "buy",
+      "symbol": "JNJ",
+      "shares": 4,
+      "price": 148.96
+    },
+    {
+      "id": "t0112",
+      "date": "2024-06-20",
+      "type": "buy",
+      "symbol": "ABBV",
+      "shares": 1,
+      "price": 172.42
+    },
+    {
+      "id": "t0113",
+      "date": "2024-06-27",
+      "type": "buy",
+      "symbol": "ABBV",
+      "shares": 1,
+      "price": 168.3
+    },
+    {
+      "id": "t0114",
+      "date": "2024-07-02",
+      "type": "buy",
+      "symbol": "ABBV",
+      "shares": 1,
+      "price": 166.47
+    },
+    {
+      "id": "t0115",
+      "date": "2024-08-30",
+      "type": "buy",
+      "symbol": "ABBV",
+      "shares": 1,
+      "price": 195
+    },
+    {
+      "id": "t0116",
+      "date": "2024-09-10",
+      "type": "buy",
+      "symbol": "ABBV",
+      "shares": 1,
+      "price": 197.51
+    },
+    {
+      "id": "t0117",
+      "date": "2024-09-16",
+      "type": "buy",
+      "symbol": "MCD",
+      "shares": 1,
+      "price": 296.1
+    },
+    {
+      "id": "t0118",
+      "date": "2024-09-16",
+      "type": "sell",
+      "symbol": "TGT",
+      "shares": 2,
+      "price": 153.23
+    },
+    {
+      "id": "t0119",
+      "date": "2024-09-17",
+      "type": "buy",
+      "symbol": "MCD",
+      "shares": 1,
+      "price": 295.33
+    },
+    {
+      "id": "t0120",
+      "date": "2024-09-30",
+      "type": "buy",
+      "symbol": "MCD",
+      "shares": 1,
+      "price": 304.98
+    },
+    {
+      "id": "t0121",
+      "date": "2024-10-15",
+      "type": "sell",
+      "symbol": "WM",
+      "shares": 5,
+      "price": 214.32
+    },
+    {
+      "id": "t0122",
+      "date": "2024-10-16",
+      "type": "buy",
+      "symbol": "PEP",
+      "shares": 1,
+      "price": 175.06
+    },
+    {
+      "id": "t0123",
+      "date": "2024-11-01",
+      "type": "buy",
+      "symbol": "PEP",
+      "shares": 1,
+      "price": 165.7
+    },
+    {
+      "id": "t0124",
+      "date": "2024-11-04",
+      "type": "buy",
+      "symbol": "PEP",
+      "shares": 1,
+      "price": 166.05
+    },
+    {
+      "id": "t0125",
+      "date": "2024-11-15",
+      "type": "buy",
+      "symbol": "PEP",
+      "shares": 1,
+      "price": 160.45
+    },
+    {
+      "id": "t0126",
+      "date": "2024-11-21",
+      "type": "buy",
+      "symbol": "PEP",
+      "shares": 1,
+      "price": 159.06
+    },
+    {
+      "id": "t0127",
+      "date": "2024-12-02",
+      "type": "buy",
+      "symbol": "PEP",
+      "shares": 1,
+      "price": 162.39
+    },
+    {
+      "id": "t0128",
+      "date": "2024-12-13",
+      "type": "buy",
+      "symbol": "PEP",
+      "shares": 1,
+      "price": 158.05
+    },
+    {
+      "id": "t0129",
+      "date": "2024-12-19",
+      "type": "buy",
+      "symbol": "PEP",
+      "shares": 1,
+      "price": 153.04
+    },
+    {
+      "id": "t0130",
+      "date": "2024-12-31",
+      "type": "buy",
+      "symbol": "PEP",
+      "shares": 1,
+      "price": 152.25
+    },
+    {
+      "id": "t0131",
+      "date": "2025-01-15",
+      "type": "buy",
+      "symbol": "PEP",
+      "shares": 1,
+      "price": 145.84
+    },
+    {
+      "id": "t0132",
+      "date": "2025-01-30",
+      "type": "buy",
+      "symbol": "PEP",
+      "shares": 1,
+      "price": 151.3
+    },
+    {
+      "id": "t0133",
+      "date": "2025-02-14",
+      "type": "buy",
+      "symbol": "PEP",
+      "shares": 1,
+      "price": 146
+    },
+    {
+      "id": "t0134",
+      "date": "2025-02-21",
+      "type": "sell",
+      "symbol": "PFE",
+      "shares": 40,
+      "price": 26.05
+    },
+    {
+      "id": "t0135",
+      "date": "2025-02-21",
+      "type": "sell",
+      "symbol": "TGT",
+      "shares": 1,
+      "price": 126.51
+    },
+    {
+      "id": "t0136",
+      "date": "2025-02-24",
+      "type": "sell",
+      "symbol": "JPM",
+      "shares": 12,
+      "price": 261.56
+    },
+    {
+      "id": "t0137",
+      "date": "2025-02-24",
+      "type": "sell",
+      "symbol": "ABBV",
+      "shares": 1,
+      "price": 204.16
+    },
+    {
+      "id": "t0138",
+      "date": "2025-02-24",
+      "type": "buy",
+      "symbol": "VICI",
+      "shares": 9,
+      "price": 31.05
+    },
+    {
+      "id": "t0139",
+      "date": "2025-02-24",
+      "type": "buy",
+      "symbol": "PEP",
+      "shares": 6,
+      "price": 153.6
+    },
+    {
+      "id": "t0140",
+      "date": "2025-02-25",
+      "type": "buy",
+      "symbol": "CVX",
+      "shares": 11,
+      "price": 158.38
+    },
+    {
+      "id": "t0141",
+      "date": "2025-02-25",
+      "type": "buy",
+      "symbol": "VICI",
+      "shares": 49,
+      "price": 32.22
+    },
+    {
+      "id": "t0142",
+      "date": "2025-02-28",
+      "type": "buy",
+      "symbol": "CVX",
+      "shares": 1,
+      "price": 156.12
+    },
+    {
+      "id": "t0143",
+      "date": "2025-03-13",
+      "type": "buy",
+      "symbol": "CVX",
+      "shares": 1,
+      "price": 153.16
+    },
+    {
+      "id": "t0144",
+      "date": "2025-03-21",
+      "type": "sell",
+      "symbol": "PFE",
+      "shares": 60,
+      "price": 26.17,
+      "note": "Includes dividend-reinvested shares"
+    },
+    {
+      "id": "t0145",
+      "date": "2025-03-24",
+      "type": "buy",
+      "symbol": "CVX",
+      "shares": 2,
+      "price": 165.9
+    },
+    {
+      "id": "t0146",
+      "date": "2025-03-25",
+      "type": "buy",
+      "symbol": "CMCSA",
+      "shares": 35,
+      "price": 36.16
+    },
+    {
+      "id": "t0147",
+      "date": "2025-03-28",
+      "type": "buy",
+      "symbol": "CMCSA",
+      "shares": 1,
+      "price": 37.1
+    },
+    {
+      "id": "t0148",
+      "date": "2025-03-31",
+      "type": "buy",
+      "symbol": "CMCSA",
+      "shares": 2,
+      "price": 36.48
+    },
+    {
+      "id": "t0149",
+      "date": "2025-04-03",
+      "type": "buy",
+      "symbol": "CMCSA",
+      "shares": 1,
+      "price": 36.36
+    },
+    {
+      "id": "t0150",
+      "date": "2025-04-15",
+      "type": "buy",
+      "symbol": "CMCSA",
+      "shares": 1,
+      "price": 34.53
+    },
+    {
+      "id": "t0151",
+      "date": "2025-04-30",
+      "type": "buy",
+      "symbol": "CMCSA",
+      "shares": 2,
+      "price": 33.59
+    },
+    {
+      "id": "t0152",
+      "date": "2025-05-01",
+      "type": "buy",
+      "symbol": "CMCSA",
+      "shares": 1,
+      "price": 33.88
+    },
+    {
+      "id": "t0153",
+      "date": "2025-05-19",
+      "type": "buy",
+      "symbol": "CMCSA",
+      "shares": 1,
+      "price": 35.6
+    },
+    {
+      "id": "t0154",
+      "date": "2025-06-02",
+      "type": "buy",
+      "symbol": "CMCSA",
+      "shares": 2,
+      "price": 34.15
+    },
+    {
+      "id": "t0155",
+      "date": "2025-06-03",
+      "type": "sell",
+      "symbol": "JNJ",
+      "shares": 1,
+      "price": 155.14
+    },
+    {
+      "id": "t0156",
+      "date": "2025-06-04",
+      "type": "buy",
+      "symbol": "CMCSA",
+      "shares": 4,
+      "price": 34.83
+    },
+    {
+      "id": "t0157",
+      "date": "2025-06-10",
+      "type": "buy",
+      "symbol": "CMCSA",
+      "shares": 2,
+      "price": 34.66
+    },
+    {
+      "id": "t0158",
+      "date": "2025-06-16",
+      "type": "buy",
+      "symbol": "CMCSA",
+      "shares": 1,
+      "price": 35.41
+    },
+    {
+      "id": "t0159",
+      "date": "2025-06-30",
+      "type": "buy",
+      "symbol": "CMCSA",
+      "shares": 2,
+      "price": 35.43
+    },
+    {
+      "id": "t0160",
+      "date": "2025-07-22",
+      "type": "buy",
+      "symbol": "CMCSA",
+      "shares": 1,
+      "price": 35.19
+    },
+    {
+      "id": "t0161",
+      "date": "2025-08-01",
+      "type": "buy",
+      "symbol": "CMCSA",
+      "shares": 2,
+      "price": 32.77
+    },
+    {
+      "id": "t0162",
+      "date": "2025-08-15",
+      "type": "buy",
+      "symbol": "CMCSA",
+      "shares": 2,
+      "price": 33.17
+    },
+    {
+      "id": "t0163",
+      "date": "2025-08-29",
+      "type": "buy",
+      "symbol": "CMCSA",
+      "shares": 1,
+      "price": 33.94
+    },
+    {
+      "id": "t0164",
+      "date": "2025-09-02",
+      "type": "buy",
+      "symbol": "CMCSA",
+      "shares": 1,
+      "price": 33.78
+    },
+    {
+      "id": "t0165",
+      "date": "2025-09-04",
+      "type": "buy",
+      "symbol": "CMCSA",
+      "shares": 1,
+      "price": 33.93
+    },
+    {
+      "id": "t0166",
+      "date": "2025-09-10",
+      "type": "buy",
+      "symbol": "CMCSA",
+      "shares": 2,
+      "price": 33.57
+    },
+    {
+      "id": "t0167",
+      "date": "2025-09-16",
+      "type": "buy",
+      "symbol": "CMCSA",
+      "shares": 1,
+      "price": 32.19
+    },
+    {
+      "id": "t0168",
+      "date": "2025-09-25",
+      "type": "sell",
+      "symbol": "VICI",
+      "shares": 2,
+      "price": 32.15
+    },
+    {
+      "id": "t0169",
+      "date": "2025-09-26",
+      "type": "buy",
+      "symbol": "CMCSA",
+      "shares": 2,
+      "price": 31.81
+    },
+    {
+      "id": "t0170",
+      "date": "2025-09-30",
+      "type": "buy",
+      "symbol": "CMCSA",
+      "shares": 1,
+      "price": 31.6
+    },
+    {
+      "id": "t0171",
+      "date": "2025-10-01",
+      "type": "buy",
+      "symbol": "CMCSA",
+      "shares": 3,
+      "price": 31.23
+    },
+    {
+      "id": "t0172",
+      "date": "2025-10-02",
+      "type": "buy",
+      "symbol": "CMCSA",
+      "shares": 3,
+      "price": 30.6
+    },
+    {
+      "id": "t0173",
+      "date": "2025-10-09",
+      "type": "buy",
+      "symbol": "PFE",
+      "shares": 4,
+      "price": 25.45
+    },
+    {
+      "id": "t0174",
+      "date": "2025-10-09",
+      "type": "buy",
+      "symbol": "PFE",
+      "shares": 1,
+      "price": 25.8
+    },
+    {
+      "id": "t0175",
+      "date": "2025-10-15",
+      "type": "buy",
+      "symbol": "PFE",
+      "shares": 4,
+      "price": 24.48
+    },
+    {
+      "id": "t0176",
+      "date": "2025-10-22",
+      "type": "buy",
+      "symbol": "PFE",
+      "shares": 1,
+      "price": 24.79
+    },
+    {
+      "id": "t0177",
+      "date": "2025-10-30",
+      "type": "buy",
+      "symbol": "PFE",
+      "shares": 1,
+      "price": 24.42
+    },
+    {
+      "id": "t0178",
+      "date": "2025-10-31",
+      "type": "buy",
+      "symbol": "PFE",
+      "shares": 1,
+      "price": 24.42
+    },
+    {
+      "id": "t0179",
+      "date": "2025-11-03",
+      "type": "buy",
+      "symbol": "PFE",
+      "shares": 1,
+      "price": 24.54
+    },
+    {
+      "id": "t0180",
+      "date": "2025-11-04",
+      "type": "buy",
+      "symbol": "PFE",
+      "shares": 3,
+      "price": 24.91
+    },
+    {
+      "id": "t0181",
+      "date": "2025-11-14",
+      "type": "buy",
+      "symbol": "PFE",
+      "shares": 2,
+      "price": 25.27
+    },
+    {
+      "id": "t0182",
+      "date": "2025-12-01",
+      "type": "buy",
+      "symbol": "VSNT",
+      "shares": 3,
+      "price": 0,
+      "note": "Spin-off from Comcast (Versant)"
+    },
+    {
+      "id": "t0183",
+      "date": "2026-01-05",
+      "type": "buy",
+      "symbol": "PFE",
+      "shares": 4,
+      "price": 25.07
+    },
+    {
+      "id": "t0184",
+      "date": "2026-01-22",
+      "type": "buy",
+      "symbol": "PFE",
+      "shares": 2,
+      "price": 26.09
+    },
+    {
+      "id": "t0185",
+      "date": "2026-02-03",
+      "type": "buy",
+      "symbol": "PFE",
+      "shares": 1,
+      "price": 25.87
+    },
+    {
+      "id": "t0186",
+      "date": "2026-02-05",
+      "type": "buy",
+      "symbol": "PFE",
+      "shares": 1,
+      "price": 26.81
+    },
+    {
+      "id": "t0187",
+      "date": "2026-02-17",
+      "type": "buy",
+      "symbol": "PFE",
+      "shares": 1,
+      "price": 27.34
+    },
+    {
+      "id": "t0188",
+      "date": "2026-03-02",
+      "type": "buy",
+      "symbol": "PFE",
+      "shares": 1,
+      "price": 27.4
+    },
+    {
+      "id": "t0189",
+      "date": "2026-03-03",
+      "type": "buy",
+      "symbol": "PFE",
+      "shares": 1,
+      "price": 26.64
+    },
+    {
+      "id": "t0190",
+      "date": "2026-03-10",
+      "type": "buy",
+      "symbol": "PFE",
+      "shares": 2,
+      "price": 26.63
+    },
+    {
+      "id": "t0191",
+      "date": "2026-03-17",
+      "type": "buy",
+      "symbol": "PFE",
+      "shares": 1,
+      "price": 27.03
+    },
+    {
+      "id": "t0192",
+      "date": "2026-03-31",
+      "type": "buy",
+      "symbol": "PFE",
+      "shares": 1,
+      "price": 28.04
+    },
+    {
+      "id": "t0193",
+      "date": "2026-04-17",
+      "type": "buy",
+      "symbol": "PFE",
+      "shares": 1,
+      "price": 27.29
+    },
+    {
+      "id": "t0194",
+      "date": "2026-04-23",
+      "type": "buy",
+      "symbol": "PFE",
+      "shares": 1,
+      "price": 27.29
+    },
+    {
+      "id": "t0195",
+      "date": "2026-06-01",
+      "type": "sell",
+      "symbol": "PEP",
+      "shares": 1,
+      "price": 142.22
+    },
+    {
+      "id": "t0196",
+      "date": "2026-06-01",
+      "type": "sell",
+      "symbol": "JNJ",
+      "shares": 1,
+      "price": 222.57
+    },
+    {
+      "id": "t0197",
+      "date": "2026-06-01",
+      "type": "buy",
+      "symbol": "PFE",
+      "shares": 3,
+      "price": 25.52
+    },
+    {
+      "id": "t0198",
+      "date": "2026-06-02",
+      "type": "buy",
+      "symbol": "PFE",
+      "shares": 9,
+      "price": 25.66
+    },
+    {
+      "id": "t0199",
+      "date": "2026-06-03",
+      "type": "buy",
+      "symbol": "PFE",
+      "shares": 6,
+      "price": 25.48
+    },
+    {
+      "id": "t0200",
+      "date": "2026-06-03",
+      "type": "buy",
+      "symbol": "PFE",
+      "shares": 5,
+      "price": 25.59
+    }
+  ]
 }

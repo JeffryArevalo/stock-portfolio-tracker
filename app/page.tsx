@@ -76,10 +76,10 @@ export default function PortfolioPage() {
           sub="From completed sells"
         />
         <KpiCard
-          title="Est. Annual Dividends"
+          title="Expected Annual Dividend Income"
           value={totals.estAnnualDividends}
           format={money}
-          sub="At current yields"
+          sub={`≈ ${money(totals.estAnnualDividends / 12)}/month at current yields`}
         />
       </div>
 
