@@ -101,7 +101,9 @@ export function PerformanceChart({ transactions }: { transactions: Transaction[]
   useEffect(() => {
     if (!txSorted.length) return;
     let cancelled = false;
-    fetch(`/api/history?symbols=${BENCHMARK_SYMBOL}&days=99999`)
+    // 10y daily — Yahoo's "max" range degrades to monthly bars, which would
+    // misprice trades made on volatile days; daily covers all trades back to 2016
+    fetch(`/api/history?symbols=${BENCHMARK_SYMBOL}&days=3650`)
       .then((r) => (r.ok ? r.json() : Promise.reject()))
       .then((d) => {
         if (!cancelled) setBenchFull(d.series?.[BENCHMARK_SYMBOL] ?? []);
