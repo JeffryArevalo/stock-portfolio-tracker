@@ -344,18 +344,62 @@ export function PerformanceChart({ transactions }: { transactions: Transaction[]
           </ResponsiveContainer>
         )}
       </div>
-      {last && (
-        <p style={{ margin: "10px 0 0", fontSize: 12.5, color: "var(--muted)" }}>
-          This range: My Portfolio {money(last["My Portfolio"])} (
-          {fmtPct(rangePct("My Portfolio", last["My Portfolio"]))}) vs S&P 500{" "}
-          {money(last["S&P 500 (same investments)"])} (
-          {fmtPct(rangePct("S&P 500 (same investments)", last["S&P 500 (same investments)"]))}) —{" "}
-          <strong style={{ color: ahead >= 0 ? "var(--good)" : "var(--bad)" }}>
-            {ahead >= 0 ? "ahead" : "behind"} by {money(Math.abs(ahead))}
-          </strong>{" "}
-          on price alone.
-        </p>
-      )}
+      {last &&
+        (() => {
+          const portPct = rangePct("My Portfolio", last["My Portfolio"]);
+          const benchPct = rangePct(
+            "S&P 500 (same investments)",
+            last["S&P 500 (same investments)"]
+          );
+          const diff = portPct - benchPct;
+          const out = diff >= 0;
+          if (!Number.isFinite(diff)) return null;
+          return (
+            <>
+              <div
+                style={{
+                  marginTop: 14,
+                  padding: "13px 18px",
+                  borderRadius: 12,
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 12,
+                  flexWrap: "wrap",
+                  background: out ? "var(--good-soft)" : "var(--bad-soft)",
+                  border: `1px solid ${out ? "var(--good)" : "var(--bad)"}55`,
+                }}
+              >
+                <span style={{ fontSize: 20, lineHeight: 1 }}>
+                  {out ? "▲" : "▼"}
+                </span>
+                <div>
+                  <div
+                    style={{
+                      fontSize: 15,
+                      fontWeight: 800,
+                      color: out ? "var(--good)" : "var(--bad)",
+                    }}
+                  >
+                    {out ? "Outperforming" : "Underperforming"} the S&P 500 by{" "}
+                    {Math.abs(diff).toFixed(2)}%
+                  </div>
+                  <div style={{ fontSize: 12, color: "var(--muted)", marginTop: 2 }}>
+                    My Portfolio {fmtPct(portPct)} vs S&P 500 {fmtPct(benchPct)} over
+                    this period
+                  </div>
+                </div>
+              </div>
+              <p style={{ margin: "10px 0 0", fontSize: 12.5, color: "var(--muted)" }}>
+                Value today: {money(last["My Portfolio"])} vs{" "}
+                {money(last["S&P 500 (same investments)"])} —{" "}
+                <strong style={{ color: ahead >= 0 ? "var(--good)" : "var(--bad)" }}>
+                  {ahead >= 0 ? "ahead" : "behind"} by {money(Math.abs(ahead))}
+                </strong>{" "}
+                on price alone.
+              </p>
+            </>
+          );
+        })()}
     </div>
   );
 }
