@@ -173,7 +173,7 @@ export function PerformanceChart({ transactions }: { transactions: Transaction[]
       return ans;
     };
 
-    return benchRange.map((bp) => {
+    const raw = benchRange.map((bp) => {
       let portfolio = 0;
       for (const [sym, steps] of holdingsSteps) {
         const sh = sharesAt(steps, bp.d);
@@ -184,25 +184,42 @@ export function PerformanceChart({ transactions }: { transactions: Transaction[]
         if (Number.isFinite(c)) portfolio += sh * c;
       }
       const bench = sharesAt(shadowSteps, bp.d) * bp.c;
+      return { date: bp.d, portfolio, bench };
+    });
+
+    // Deposit-adjusted % return: gain relative to (starting value + money
+    // added since). Counting deposits as gains would massively inflate the
+    // Max view, where the portfolio was built up over years of buying.
+    const t0 = raw[0].date;
+    const startPort = raw[0].portfolio;
+    const startBench = raw[0].bench;
+    let flowIdx = 0;
+    while (flowIdx < txSorted.length && txSorted[flowIdx].date <= t0) flowIdx++;
+    let netFlows = 0;
+
+    return raw.map((p) => {
+      while (flowIdx < txSorted.length && txSorted[flowIdx].date <= p.date) {
+        const t = txSorted[flowIdx];
+        netFlows += (t.type === "buy" ? 1 : -1) * t.shares * t.price;
+        flowIdx++;
+      }
+      const portBase = startPort + netFlows;
+      const benchBase = startBench + netFlows;
       return {
-        date: bp.d,
-        "My Portfolio": portfolio,
-        "S&P 500 (same investments)": bench,
+        date: p.date,
+        "My Portfolio": p.portfolio,
+        "S&P 500 (same investments)": p.bench,
+        pPct: portBase > 0 ? ((p.portfolio - portBase) / portBase) * 100 : NaN,
+        bPct: benchBase > 0 ? ((p.bench - benchBase) / benchBase) * 100 : NaN,
       };
     });
   }, [current, benchFull, txSorted]);
 
-  const first = data.length ? data[0] : null;
   const last = data.length ? data[data.length - 1] : null;
   const ahead = last
     ? last["My Portfolio"] - last["S&P 500 (same investments)"]
     : 0;
 
-  // % change over the displayed range, per series
-  const rangePct = (series: "My Portfolio" | "S&P 500 (same investments)", value: number) => {
-    const base = first?.[series] ?? 0;
-    return base > 0 ? (value / base - 1) * 100 : NaN;
-  };
   const fmtPct = (p: number) =>
     Number.isFinite(p) ? `${p >= 0 ? "+" : ""}${p.toFixed(2)}%` : "–";
 
@@ -303,13 +320,17 @@ export function PerformanceChart({ transactions }: { transactions: Transaction[]
                 width={70}
               />
               <Tooltip
-                formatter={(v?: number | string, name?: string | number) => {
+                formatter={(
+                  v?: number | string,
+                  name?: string | number,
+                  item?: { payload?: { pPct?: number; bPct?: number } }
+                ) => {
                   const n = Number(v);
-                  const p = rangePct(
-                    name as "My Portfolio" | "S&P 500 (same investments)",
-                    n
-                  );
-                  return `${money(n)}  (${fmtPct(p)})`;
+                  const p =
+                    name === "My Portfolio"
+                      ? item?.payload?.pPct
+                      : item?.payload?.bPct;
+                  return `${money(n)}  (${fmtPct(p ?? NaN)})`;
                 }}
                 labelFormatter={(d) => dateLabel(String(d))}
                 contentStyle={{
@@ -346,11 +367,8 @@ export function PerformanceChart({ transactions }: { transactions: Transaction[]
       </div>
       {last &&
         (() => {
-          const portPct = rangePct("My Portfolio", last["My Portfolio"]);
-          const benchPct = rangePct(
-            "S&P 500 (same investments)",
-            last["S&P 500 (same investments)"]
-          );
+          const portPct = last.pPct;
+          const benchPct = last.bPct;
           const diff = portPct - benchPct;
           const out = diff >= 0;
           if (!Number.isFinite(diff)) return null;
@@ -384,8 +402,8 @@ export function PerformanceChart({ transactions }: { transactions: Transaction[]
                     {Math.abs(diff).toFixed(2)}%
                   </div>
                   <div style={{ fontSize: 12, color: "var(--muted)", marginTop: 2 }}>
-                    My Portfolio {fmtPct(portPct)} vs S&P 500 {fmtPct(benchPct)} over
-                    this period
+                    My Portfolio {fmtPct(portPct)} vs S&P 500 {fmtPct(benchPct)} —
+                    return on money invested this period
                   </div>
                 </div>
               </div>
