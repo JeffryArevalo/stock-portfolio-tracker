@@ -17,6 +17,7 @@ import { compact, dateLabel, money } from "@/lib/format";
 import { SectionTitle } from "./ui";
 
 const RANGES = [
+  { label: "1D", days: 1 }, // intraday, from previous close
   { label: "1M", days: 30 },
   { label: "3M", days: 90 },
   { label: "6M", days: 180 },
@@ -25,6 +26,20 @@ const RANGES = [
   { label: "5Y", days: 1825 },
   { label: "Max", days: 99999 }, // since the first trade
 ];
+
+/** Intraday points carry full ISO timestamps; daily points are date-only. */
+function isIntraday(d: string) {
+  return d.includes("T");
+}
+function pointLabel(d: string) {
+  return isIntraday(d)
+    ? new Date(d).toLocaleTimeString("en-US", {
+        hour: "numeric",
+        minute: "2-digit",
+        timeZone: "America/New_York",
+      })
+    : dateLabel(d);
+}
 
 type Point = { d: string; c: number };
 type SeriesMap = Record<string, Point[]>;
@@ -332,7 +347,7 @@ export function PerformanceChart({ transactions }: { transactions: Transaction[]
                       : item?.payload?.bPct;
                   return `${money(n)}  (${fmtPct(p ?? NaN)})`;
                 }}
-                labelFormatter={(d) => dateLabel(String(d))}
+                labelFormatter={(d) => pointLabel(String(d))}
                 contentStyle={{
                   background: "var(--tooltip-bg)",
                   border: "1px solid var(--border)",
