@@ -1605,6 +1605,14 @@
       "symbol": "PFE",
       "shares": 5,
       "price": 25.59
+    },
+    {
+      "id": "mqjm8ux70zavtr",
+      "date": "2026-06-18",
+      "type": "buy",
+      "symbol": "MDT",
+      "shares": 1,
+      "price": 79.04
     }
   ]
 }
