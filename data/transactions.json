@@ -1613,6 +1613,14 @@
       "symbol": "MDT",
       "shares": 1,
       "price": 79.04
+    },
+    {
+      "id": "mr0pfverb38z8q",
+      "date": "2026-06-30",
+      "type": "buy",
+      "symbol": "MDT",
+      "shares": 1,
+      "price": 79.22
     }
   ]
 }
