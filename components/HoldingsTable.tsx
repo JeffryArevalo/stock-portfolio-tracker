@@ -12,16 +12,16 @@ type SortKey =
 
 const COLS: Array<{ key: SortKey; label: string; align: "left" | "right"; hideMobile?: boolean }> = [
   { key: "symbol", label: "Symbol", align: "left" },
-  { key: "price", label: "Price", align: "right" },
-  { key: "dailyPct", label: "Day %", align: "right" },
   { key: "shares", label: "Shares", align: "right", hideMobile: true },
-  { key: "avgCost", label: "Avg Cost", align: "right", hideMobile: true },
   { key: "invested", label: "Cost Basis", align: "right", hideMobile: true },
-  { key: "value", label: "Value", align: "right" },
+  { key: "avgCost", label: "Avg Cost", align: "right", hideMobile: true },
+  { key: "price", label: "Current Price", align: "right" },
+  { key: "dailyPct", label: "Day Change %", align: "right" },
+  { key: "divYieldPct", label: "Div Yield %", align: "right", hideMobile: true },
+  { key: "value", label: "Current Value", align: "right" },
   { key: "gain", label: "Total Gain", align: "right" },
   { key: "gainPct", label: "Return", align: "right", hideMobile: true },
   { key: "weight", label: "Weight", align: "right", hideMobile: true },
-  { key: "divYieldPct", label: "Div Yield", align: "right", hideMobile: true },
 ];
 
 export function HoldingsTable({ rows, loading }: { rows: HoldingRow[]; loading: boolean }) {
@@ -136,18 +136,18 @@ export function HoldingsTable({ rows, loading }: { rows: HoldingRow[]; loading: 
                       </div>
                     </div>
                   </td>
+                  <Td hideMobile>{shares(r.shares)}</Td>
+                  <Td hideMobile>{money(r.invested)}</Td>
+                  <Td hideMobile>{money(r.avgCost)}</Td>
                   <Td>{money(r.price)}</Td>
                   <Td style={toneStyle(r.dailyPct)}>{pctPlain(r.dailyPct)}</Td>
-                  <Td hideMobile>{shares(r.shares)}</Td>
-                  <Td hideMobile>{money(r.avgCost)}</Td>
-                  <Td hideMobile>{money(r.invested)}</Td>
+                  <Td hideMobile>{pctPlain(r.divYieldPct)}</Td>
                   <Td style={{ fontWeight: 700 }}>{money(r.value)}</Td>
                   <Td style={{ ...toneStyle(r.gain), fontWeight: 600 }}>
                     {moneySigned(r.gain)}
                   </Td>
                   <Td hideMobile style={toneStyle(r.gainPct)}>{pctSigned(r.gainPct)}</Td>
                   <Td hideMobile>{pct(r.weight)}</Td>
-                  <Td hideMobile>{pctPlain(r.divYieldPct)}</Td>
                 </tr>
               ))
             )}
