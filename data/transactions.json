@@ -1637,6 +1637,14 @@
       "symbol": "IBM",
       "shares": 6,
       "price": 213.8
+    },
+    {
+      "id": "mrxmvd3n8vxg56",
+      "date": "2026-07-23",
+      "type": "buy",
+      "symbol": "IBM",
+      "shares": 1,
+      "price": 204.18
     }
   ]
 }
