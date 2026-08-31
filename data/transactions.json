@@ -1653,6 +1653,14 @@
       "symbol": "MDT",
       "shares": 3,
       "price": 85.27
+    },
+    {
+      "id": "mthbxtvvqbmsn1",
+      "date": "2026-08-31",
+      "type": "buy",
+      "symbol": "MDT",
+      "shares": 3,
+      "price": 90.92
     }
   ]
 }
