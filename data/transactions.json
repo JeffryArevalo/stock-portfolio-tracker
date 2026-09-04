@@ -1661,6 +1661,14 @@
       "symbol": "MDT",
       "shares": 3,
       "price": 90.92
+    },
+    {
+      "id": "mtn41m3zt4ow99",
+      "date": "2026-09-04",
+      "type": "sell",
+      "symbol": "VICI",
+      "shares": 1,
+      "price": 25.81
     }
   ]
 }
