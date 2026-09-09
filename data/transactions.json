@@ -1669,6 +1669,14 @@
       "symbol": "VICI",
       "shares": 1,
       "price": 25.81
+    },
+    {
+      "id": "mtu7pqqt66ywr5",
+      "date": "2026-09-09",
+      "type": "buy",
+      "symbol": "MDT",
+      "shares": 1,
+      "price": 92.57
     }
   ]
 }
